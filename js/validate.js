@@ -24,7 +24,22 @@ function validate(event)
         isError = true;
     }
     
+    //Validate that hours are numeric and between 1-100
+    var hours = parseInt($("#hours").val());
     
+    if(!Number.isInteger(hours)) {
+        report("hours-error", "hours must be numeric");
+        isError = true;
+    } else if (hours < 1 || hours > 100)
+    {
+        report("hours-error", "hours must be between 1-100");
+        isError = true;
+    }
+    
+    //submit the form if all data is good
+    if(!isError) {
+        $("#payroll-form").submit();
+    }
 }
 
 //Update form.php to display error message
@@ -38,4 +53,5 @@ function report(id, message)
 function removeErrors()
 {
     $("#emp-id-error").parent().hide();
+    $("#hours-error").parent().hide();
 }
