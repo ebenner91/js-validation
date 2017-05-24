@@ -30,9 +30,19 @@ function validate(event)
     if(!Number.isInteger(hours)) {
         report("hours-error", "hours must be numeric");
         isError = true;
-    } else if (hours < 1 || hours > 100)
-    {
+    } else if (hours < 1 || hours > 100) {
         report("hours-error", "hours must be between 1-100");
+        isError = true;
+    }
+    
+    //Validate rate - must be numeric and positive
+    var rate = parseInt($("#payrate").val());
+    if(!Number.isInteger(rate))
+    {
+        report("payrate-error", "rate must be numeric");
+        isError = true;
+    } else if(rate < 0) {
+        report("payrate-error", "rate must be positive");
         isError = true;
     }
     
@@ -54,4 +64,5 @@ function removeErrors()
 {
     $("#emp-id-error").parent().hide();
     $("#hours-error").parent().hide();
+    $("#payrate-error").parent().hide();
 }
